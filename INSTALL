@@ -1,0 +1,9 @@
+Building ViorCoin
+
+See doc/readme-qt.rst for instructions on building ViorCoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of ViorCoin.
+
+See doc/build-*.txt for instructions on building ViorCoins,
+the intended-for-services, no-graphical-interface, reference
+implementation of ViorCoind.
