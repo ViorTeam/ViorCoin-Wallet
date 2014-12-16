@@ -14,12 +14,8 @@
     <message>
         <location line="+41"/>
         <source>Copyright © 2009-2014 The Bitcoin developers
-Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The BlackCoin developers
 Copyright © 2014 The ViorCoin developers</source>
         <translation>Copyright © 2009-2014 The Bitcoin developers
-Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The BlackCoin developers
 Copyright © 2014 The ViorCoin developers</translation>
     </message>
     <message>
@@ -2893,8 +2889,8 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <location line="+35"/>
-        <source>SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation>SSL-inställningar: (se Bitcoin-wikin för SSL-setup instruktioner)</translation>
+        <source>SSL options: (see the ViorCoin Wiki for SSL setup instructions)</source>
+        <translation>SSL-inställningar: (se ViorCoin-wikin för SSL-setup instruktioner)</translation>
     </message>
     <message>
         <location line="-74"/>

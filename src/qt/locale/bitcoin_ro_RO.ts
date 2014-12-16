@@ -14,12 +14,8 @@
     <message>
         <location line="+41"/>
         <source>Copyright © 2009-2014 The Bitcoin developers
-Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The BlackCoin developers
 Copyright © 2014 The ViorCoin developers</source>
         <translation>Copyright © 2009-2014 The Bitcoin developers
-Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The BlackCoin developers
 Copyright © 2014 The ViorCoin developers</translation>
     </message>
     <message>
@@ -2892,8 +2888,8 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
     </message>
     <message>
         <location line="+35"/>
-        <source>SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation>Optiuni SSl (vezi Bitcoin wiki pentru intructiunile de instalare)</translation>
+        <source>SSL options: (see the ViorCoin Wiki for SSL setup instructions)</source>
+        <translation>Optiuni SSl (vezi ViorCoin wiki pentru intructiunile de instalare)</translation>
     </message>
     <message>
         <location line="-74"/>

@@ -14,12 +14,9 @@
     <message>
         <location line="+41"/>
         <source>Copyright © 2009-2014 The Bitcoin developers
-Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The BlackCoin developers
 Copyright © 2014 The ViorCoin developers</source>
         <translation>コピーライト © 2009-2014 The Bitcoin developers
-コピーライト © 2012-2014 The NovaCoin developers
-コピーライト © 2014 The BlackCoin developers</translation>
+コピーライト © 2014 The ViorCoin developers</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -2890,8 +2887,8 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <location line="+35"/>
-        <source>SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation>SSL オプション: (SSLのセットアップ手順は Bitcoin Wiki をご覧下さい)</translation>
+        <source>SSL options: (see the ViorCoin Wiki for SSL setup instructions)</source>
+        <translation>SSL オプション: (SSLのセットアップ手順は ViorCoin Wiki をご覧下さい)</translation>
     </message>
     <message>
         <location line="-74"/>
