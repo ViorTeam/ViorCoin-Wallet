@@ -989,10 +989,7 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\viorcoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\viorcoin
-    // Mac: ~/Library/Application Support/viorcoin
-    // Unix: ~/.viorcoin
+
 #ifdef WIN32
     // Windows
     return GetSpecialFolderPath(CSIDL_APPDATA) / "viorcoin";

@@ -126,8 +126,8 @@ bool CWallet::LoadCScript(const CScript& redeemScript)
     if (redeemScript.size() > MAX_SCRIPT_ELEMENT_SIZE)
     {
         std::string strAddr = CBitcoinAddress(redeemScript.GetID()).ToString();
-        printf("%s: Warning: This wallet contains a redeemScript of size %"PRIszu" which exceeds maximum size %i thus can never be redeemed. Do not use address %s.\n",
-            __func__, redeemScript.size(), MAX_SCRIPT_ELEMENT_SIZE, strAddr.c_str());
+        printf("CWallet::LoadCScript(): Warning: This wallet contains a redeemScript of size %"PRIszu" which exceeds maximum size %i thus can never be redeemed. Do not use address %s.\n",
+            redeemScript.size(), MAX_SCRIPT_ELEMENT_SIZE, strAddr.c_str());
         return true;
     }
 
@@ -1528,7 +1528,8 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
 
                         // Reserve a new key pair from key pool
                         CPubKey vchPubKey;
-                        assert(reservekey.GetReservedKey(vchPubKey)); // should never fail, as we just unlocked
+						bool b = reservekey.GetReservedKey(vchPubKey);
+						assert(b); // should never fail, as we just unlocked
 
                         scriptChange.SetDestination(vchPubKey.GetID());
                     }
@@ -1971,7 +1972,11 @@ bool CWallet::CreateStealthTransaction(CScript scriptPubKey, int64_t nValue, std
                 continue;
             
             char key[64];
+#ifndef _MSC_VER
             if (snprintf(key, sizeof(key), "n_%u", k) < 1)
+#else
+            if (_snprintf(key, sizeof(key), "n_%u", k) < 1)
+#endif
             {
                 printf("CreateStealthTransaction(): Error creating narration key.");
                 break;
@@ -2156,7 +2161,11 @@ bool CWallet::FindStealthTransactions(const CTransaction& tx, mapValue_t& mapNar
                 {
                     std::string sNarr = std::string(vchENarr.begin(), vchENarr.end());
                     
+#ifndef _MSC_VER
                     snprintf(cbuf, sizeof(cbuf), "n_%d", nOutputIdOuter-1); // plaintext narration always matches preceding value output
+#else
+                    _snprintf(cbuf, sizeof(cbuf), "n_%d", nOutputIdOuter-1); // plaintext narration always matches preceding value output
+#endif
                     mapNarr[cbuf] = sNarr;
                 } else
                 {
@@ -2320,7 +2329,11 @@ bool CWallet::FindStealthTransactions(const CTransaction& tx, mapValue_t& mapNar
                     };
                     std::string sNarr = std::string(vchNarr.begin(), vchNarr.end());
                     
+#ifndef _MSC_VER
                     snprintf(cbuf, sizeof(cbuf), "n_%d", nOutputId);
+#else
+                    _snprintf(cbuf, sizeof(cbuf), "n_%d", nOutputId);
+#endif
                     mapNarr[cbuf] = sNarr;
                 };
                 

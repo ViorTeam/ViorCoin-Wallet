@@ -218,7 +218,11 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx)
     char cbuf[256];
     for (int k = 0; k < wtx.vout.size(); ++k)
     {
+#ifndef _MSC_VER
         snprintf(cbuf, sizeof(cbuf), "n_%d", k);
+#else
+        _snprintf(cbuf, sizeof(cbuf), "n_%d", k);
+#endif
         if (wtx.mapValue.count(cbuf) && !wtx.mapValue[cbuf].empty())
         strHTML += "<br><b>" + tr(cbuf) + ":</b> " + GUIUtil::HtmlEscape(wtx.mapValue[cbuf], true) + "<br>";
     }

@@ -35,6 +35,14 @@
 #endif
 
 #include <QApplication>
+
+#ifdef WIN32
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+#include <QtPlugin>
+	Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+#endif
+#endif
+
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QMenu>
@@ -1038,7 +1046,11 @@ void BitcoinGUI::encryptWallet(bool status)
 
 void BitcoinGUI::backupWallet()
 {
-    QString saveDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+	QString saveDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).at(0);
+#else
+	QString saveDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+#endif 
     QString filename = QFileDialog::getSaveFileName(this, tr("Backup Wallet"), saveDir, tr("Wallet Data (*.dat)"));
     if(!filename.isEmpty()) {
         if(!walletModel->backupWallet(filename)) {

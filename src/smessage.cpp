@@ -53,12 +53,11 @@ Notes:
 #include "init.h" // pwalletMain
 #include "txdb.h"
 
-
+#ifndef _MSC_VER
 #include "lz4/lz4.c"
-
 #include "xxhash/xxhash.h"
 #include "xxhash/xxhash.c"
-
+#endif
 
 // On 64 bit system ld is 64bits
 #ifdef IS_ARCH_64
@@ -797,6 +796,7 @@ std::string getTimeString(int64_t timestamp, char *buffer, size_t nBuffer)
 std::string fsReadable(uint64_t nBytes)
 {
     char buffer[128];
+#ifndef _MSC_VER
     if (nBytes >= 1024ll*1024ll*1024ll*1024ll)
         snprintf(buffer, sizeof(buffer), "%.2f TB", nBytes/1024.0/1024.0/1024.0/1024.0);
     else
@@ -810,6 +810,21 @@ std::string fsReadable(uint64_t nBytes)
         snprintf(buffer, sizeof(buffer), "%.2f KB", nBytes/1024.0);
     else
         snprintf(buffer, sizeof(buffer), "%"PRIu64" bytes", nBytes);
+#else
+    if (nBytes >= 1024ll*1024ll*1024ll*1024ll)
+        _snprintf(buffer, sizeof(buffer), "%.2f TB", nBytes/1024.0/1024.0/1024.0/1024.0);
+    else
+    if (nBytes >= 1024*1024*1024)
+        _snprintf(buffer, sizeof(buffer), "%.2f GB", nBytes/1024.0/1024.0/1024.0);
+    else
+    if (nBytes >= 1024*1024)
+        _snprintf(buffer, sizeof(buffer), "%.2f MB", nBytes/1024.0/1024.0);
+    else
+    if (nBytes >= 1024)
+        _snprintf(buffer, sizeof(buffer), "%.2f KB", nBytes/1024.0);
+    else
+        _snprintf(buffer, sizeof(buffer), "%"PRIu64" bytes", nBytes);
+#endif
     return std::string(buffer);
 };
 

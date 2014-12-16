@@ -350,7 +350,11 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(const QList<SendCoinsRecipie
                 pos++;
             
             char key[64];
+#ifndef _MSC_VER
             if (snprintf(key, sizeof(key), "n_%u", pos) < 1)
+#else
+            if (_snprintf(key, sizeof(key), "n_%u", pos) < 1)
+#endif
             {
                 printf("CreateStealthTransaction(): Error creating narration key.");
                 continue;

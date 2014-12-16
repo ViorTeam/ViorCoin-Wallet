@@ -2,7 +2,6 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
 #ifndef BITCOIN_SERIALIZE_H
 #define BITCOIN_SERIALIZE_H
 
@@ -12,20 +11,28 @@
 #include <set>
 #include <cassert>
 #include <limits>
-#include <stdint.h>
 #include <cstring>
 #include <cstdio>
 
 #include <boost/type_traits/is_fundamental.hpp>
 #include <boost/tuple/tuple.hpp>
+#include <boost/tuple/tuple_comparison.hpp>
+#include <boost/tuple/tuple_io.hpp>
 
 #include "allocators.h"
 #include "version.h"
 
-class CAutoFile;
-class CDataStream;
-class CScript;
+typedef long long  int64;
+typedef unsigned long long  uint64;
 
+#ifdef _MSC_VER
+#undef max
+#undef min
+#endif
+
+class CScript;
+class CDataStream;
+class CAutoFile;
 static const unsigned int MAX_SIZE = 0x02000000;
 
 // Used to bypass the rule against non-const reference to temporary
@@ -66,6 +73,7 @@ enum
         assert(fGetSize||fWrite||fRead); /* suppress warning */ \
         s.nType = nType;                        \
         s.nVersion = nVersion;                  \
+		std::map<int, int>  mapUnkIds;			\
         {statements}                            \
         return nSerSize;                        \
     }                                           \
@@ -78,6 +86,7 @@ enum
         const bool fRead = false;               \
         unsigned int nSerSize = 0;              \
         assert(fGetSize||fWrite||fRead); /* suppress warning */ \
+		std::map<int, int>  mapUnkIds;			\
         {statements}                            \
     }                                           \
     template<typename Stream>                   \
@@ -89,6 +98,7 @@ enum
         const bool fRead = true;                \
         unsigned int nSerSize = 0;              \
         assert(fGetSize||fWrite||fRead); /* suppress warning */ \
+		std::map<int, int>  mapUnkIds;			\
         {statements}                            \
     }
 
@@ -761,7 +771,7 @@ public:
         Init(nTypeIn, nVersionIn);
     }
 
-    CDataStream(const std::vector<unsigned char>& vchIn, int nTypeIn, int nVersionIn) : vch((char*)&vchIn.begin()[0], (char*)&vchIn.end()[0])
+	CDataStream(const std::vector<unsigned char>& vchIn, int nTypeIn, int nVersionIn) : vch(vchIn.begin(), vchIn.end())
     {
         Init(nTypeIn, nVersionIn);
     }

@@ -2111,7 +2111,11 @@ Value clearwallettransactions(const Array& params, bool fHelp)
             if (datKey.get_data() == NULL || datValue.get_data() == NULL
                 || ret != 0)
             {
+#ifndef _MSC_VER
                 snprintf(cbuf, sizeof(cbuf), "wallet DB error %d, %s", ret, db_strerror(ret));
+#else
+                _snprintf(cbuf, sizeof(cbuf), "wallet DB error %d, %s", ret, db_strerror(ret));
+#endif
                 throw runtime_error(cbuf);
             };
             
@@ -2150,8 +2154,12 @@ Value clearwallettransactions(const Array& params, bool fHelp)
         
         //pwalletMain->mapWallet.clear();
     }
-    
+
+#ifndef _MSC_VER
     snprintf(cbuf, sizeof(cbuf), "Removed %u transactions.", nTransactions);
+#else 
+    _snprintf(cbuf, sizeof(cbuf), "Removed %u transactions.", nTransactions);
+#endif
     result.push_back(Pair("complete", std::string(cbuf)));
     result.push_back(Pair("", "Reload with scanforstealthtxns or re-download blockchain."));
     
@@ -2261,7 +2269,12 @@ Value scanforstealthtxns(const Array& params, bool fHelp)
     printf("Found %u new owned stealth transactions.\n", pwalletMain->nFoundStealth);
     
     char cbuf[256];
+
+#ifndef _MSC_VER
     snprintf(cbuf, sizeof(cbuf), "%u new stealth transactions.", pwalletMain->nFoundStealth);
+#else
+    _snprintf(cbuf, sizeof(cbuf), "%u new stealth transactions.", pwalletMain->nFoundStealth);
+#endif
     
     result.push_back(Pair("result", "Scan complete."));
     result.push_back(Pair("found", std::string(cbuf)));

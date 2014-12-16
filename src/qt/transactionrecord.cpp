@@ -61,8 +61,12 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                     sub.type = TransactionRecord::RecvFromOther;
                     sub.address = mapValue["from"];
                 }
-                
+
+#ifndef _MSC_VER
                 snprintf(cbuf, sizeof(cbuf), "n_%u", nOut);
+#else                
+                _snprintf(cbuf, sizeof(cbuf), "n_%u", nOut);
+#endif
                 mapValue_t::const_iterator mi = wtx.mapValue.find(cbuf);
                 if (mi != wtx.mapValue.end() && !mi->second.empty())
                     sub.narration = mi->second;
@@ -173,7 +177,11 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                     sub.address = mapValue["to"];
                 }
                 
+#ifndef _MSC_VER
                 snprintf(cbuf, sizeof(cbuf), "n_%u", nOut);
+#else
+                _snprintf(cbuf, sizeof(cbuf), "n_%u", nOut);
+#endif
                 mapValue_t::const_iterator mi = wtx.mapValue.find(cbuf);
                 if (mi != wtx.mapValue.end() && !mi->second.empty())
                     sub.narration = mi->second;

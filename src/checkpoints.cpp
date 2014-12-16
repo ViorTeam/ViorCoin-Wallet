@@ -28,14 +28,14 @@ namespace Checkpoints
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
         ( 0,      hashGenesisBlock )
-        ( 5000, uint256("0x332efe86d35da22ad3df008a09634653482e9a091e4e0dc9a6e565bcc8ddff2d"))
-        (10000, uint256("0x8481845fe7a49c3f9523ae6cedaa04bdb07703b9ad0745858be49ed4546dc543"))
-        (15000, uint256("0x3a9c0cd351ca17c72c9efb86d3e38a836a98ad1846787dc664e2194a0708701f"))
+		( 5000, uint256("0x332efe86d35da22ad3df008a09634653482e9a091e4e0dc9a6e565bcc8ddff2d"))
+		(10000, uint256("0x8481845fe7a49c3f9523ae6cedaa04bdb07703b9ad0745858be49ed4546dc543"))
+		(15000, uint256("0x3a9c0cd351ca17c72c9efb86d3e38a836a98ad1846787dc664e2194a0708701f"))
         (20000, uint256("0xc58ca23630bac3ec399065bd6ad5d6c867a275d31f465e2a2c443d363dd83245"))
         (25000, uint256("0x839996962b1312c30da5b127919a22d918dbce7cde4d0ca40e2f10a6ca2e8dfc"))
-        (30000, uint256("0x8517d1b029a59408b43ac739e92da00e2f90dee5384048280f28ecb543ba147d"))
-        (35000, uint256("0x224a70e57c537fce405aaa4ec1c32326ec39c3c83c0b7c03a31d31c21288645f"))
-    ;
+		(30000, uint256("0x8517d1b029a59408b43ac739e92da00e2f90dee5384048280f28ecb543ba147d"))
+		(35000, uint256("0x224a70e57c537fce405aaa4ec1c32326ec39c3c83c0b7c03a31d31c21288645f"))
+	;
 
     // TestNet has no checkpoints
     static MapCheckpoints mapCheckpointsTestnet =

@@ -8,9 +8,15 @@
 #ifdef WIN32
 #define _WIN32_WINNT 0x0501
 #define WIN32_LEAN_AND_MEAN 1
+
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
+
+#ifndef _MSC_VER
+#define FD_SETSIZE 1024 // max number of fds in fd_set
+#endif
+
 #include <winsock2.h>
 #include <mswsock.h>
 #include <ws2tcpip.h>
@@ -23,10 +29,11 @@
 #include <net/if.h>
 #include <netinet/in.h>
 #include <ifaddrs.h>
-
-typedef u_int SOCKET;
 #endif
 
+#ifndef _MSC_VER
+typedef u_int SOCKET;
+#endif
 
 #ifdef WIN32
 #define MSG_NOSIGNAL        0

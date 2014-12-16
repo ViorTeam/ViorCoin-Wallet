@@ -9,16 +9,24 @@
 #include <string>
 #include <boost/thread/mutex.hpp>
 #include <map>
+#include <openssl/crypto.h> // for OPENSSL_cleanse()
 
 #ifdef WIN32
+
 #ifdef _WIN32_WINNT
 #undef _WIN32_WINNT
 #endif
+
 #define _WIN32_WINNT 0x0501
+
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN 1
+#endif
+
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
+
 #include <windows.h>
 // This is used to attempt to keep keying material out of swap
 // Note that VirtualLock does not provide this as a guarantee on Windows,

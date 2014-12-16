@@ -199,8 +199,11 @@ Value smsglocalkeys(const Array& params, bool fHelp)
             nKeys++;
         };
         
-        
+#ifndef _MSC_VER
         snprintf(cbuf, sizeof(cbuf), "%u keys listed.", nKeys);
+#else        
+        _snprintf(cbuf, sizeof(cbuf), "%u keys listed.", nKeys);
+#endif
         result.push_back(Pair("result", std::string(cbuf)));
         
     } else
@@ -332,8 +335,12 @@ Value smsglocalkeys(const Array& params, bool fHelp)
             result.push_back(Pair("key", address + " - " + sPublicKey + " - " + entry.second));
             nKeys++;
         };
-        
+
+#ifndef _MSC_VER
         snprintf(cbuf, sizeof(cbuf), "%u keys listed from wallet.", nKeys);
+#else        
+        _snprintf(cbuf, sizeof(cbuf), "%u keys listed from wallet.", nKeys);
+#endif
         result.push_back(Pair("result", std::string(cbuf)));
     } else
     {
@@ -616,7 +623,11 @@ Value smsginbox(const Array& params, bool fHelp)
             delete it;
             dbInbox.TxnCommit();
             
+#ifndef _MSC_VER
             snprintf(cbuf, sizeof(cbuf), "Deleted %u messages.", nMessages);
+#else
+            _snprintf(cbuf, sizeof(cbuf), "Deleted %u messages.", nMessages);
+#endif
             result.push_back(Pair("result", std::string(cbuf)));
         } else
         if (mode == "all"
@@ -662,7 +673,11 @@ Value smsginbox(const Array& params, bool fHelp)
             delete it;
             dbInbox.TxnCommit();
             
+#ifndef _MSC_VER
             snprintf(cbuf, sizeof(cbuf), "%u messages shown.", nMessages);
+#else
+            _snprintf(cbuf, sizeof(cbuf), "%u messages shown.", nMessages);
+#endif
             result.push_back(Pair("result", std::string(cbuf)));
             
         } else
@@ -726,8 +741,11 @@ Value smsgoutbox(const Array& params, bool fHelp)
             delete it;
             dbOutbox.TxnCommit();
             
-            
+#ifndef _MSC_VER
             snprintf(cbuf, sizeof(cbuf), "Deleted %u messages.", nMessages);
+#else            
+            _snprintf(cbuf, sizeof(cbuf), "Deleted %u messages.", nMessages);
+#endif
             result.push_back(Pair("result", std::string(cbuf)));
         } else
         if (mode == "all")
@@ -755,8 +773,12 @@ Value smsgoutbox(const Array& params, bool fHelp)
                 nMessages++;
             };
             delete it;
-            
+
+#ifndef _MSC_VER
             snprintf(cbuf, sizeof(cbuf), "%u sent messages shown.", nMessages);
+#else            
+            _snprintf(cbuf, sizeof(cbuf), "%u sent messages shown.", nMessages);
+#endif
             result.push_back(Pair("result", std::string(cbuf)));
         } else
         {
@@ -805,7 +827,11 @@ Value smsgbuckets(const Array& params, bool fHelp)
                 std::string sBucket = boost::lexical_cast<std::string>(it->first);
                 std::string sFile = sBucket + "_01.dat";
                 
+#ifndef _MSC_VER
                 snprintf(cbuf, sizeof(cbuf), "%"PRIszu, tokenSet.size());
+#else
+                _snprintf(cbuf, sizeof(cbuf), "%"PRIszu, tokenSet.size());
+#endif
                 std::string snContents(cbuf);
                 
                 std::string sHash = boost::lexical_cast<std::string>(it->second.hash);

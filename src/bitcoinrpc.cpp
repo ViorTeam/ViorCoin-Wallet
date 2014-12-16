@@ -870,10 +870,6 @@ void ThreadRPCServer2(void* parg)
         acceptor->listen(socket_base::max_connections);
 
         RPCListen(acceptor, context, fUseSSL);
-        // Cancel outstanding listen-requests for this acceptor when shutting down
-        StopRequests.connect(signals2::slot<void ()>(
-                    static_cast<void (ip::tcp::acceptor::*)()>(&ip::tcp::acceptor::close), acceptor.get())
-                .track(acceptor));
 
         fListening = true;
     }
@@ -896,10 +892,6 @@ void ThreadRPCServer2(void* parg)
             acceptor->listen(socket_base::max_connections);
 
             RPCListen(acceptor, context, fUseSSL);
-            // Cancel outstanding listen-requests for this acceptor when shutting down
-            StopRequests.connect(signals2::slot<void ()>(
-                        static_cast<void (ip::tcp::acceptor::*)()>(&ip::tcp::acceptor::close), acceptor.get())
-                    .track(acceptor));
 
             fListening = true;
         }
