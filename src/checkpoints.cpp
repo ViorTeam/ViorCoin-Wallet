@@ -11,7 +11,6 @@
 #include "main.h"
 #include "uint256.h"
 
-
 static const int nCheckpointSpan = 10;
 
 namespace Checkpoints
@@ -27,15 +26,17 @@ namespace Checkpoints
     //
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
-        ( 0,      hashGenesisBlock )
-		( 5000, uint256("0x332efe86d35da22ad3df008a09634653482e9a091e4e0dc9a6e565bcc8ddff2d"))
-		(10000, uint256("0x8481845fe7a49c3f9523ae6cedaa04bdb07703b9ad0745858be49ed4546dc543"))
-		(15000, uint256("0x3a9c0cd351ca17c72c9efb86d3e38a836a98ad1846787dc664e2194a0708701f"))
-        (20000, uint256("0xc58ca23630bac3ec399065bd6ad5d6c867a275d31f465e2a2c443d363dd83245"))
-        (25000, uint256("0x839996962b1312c30da5b127919a22d918dbce7cde4d0ca40e2f10a6ca2e8dfc"))
-		(30000, uint256("0x8517d1b029a59408b43ac739e92da00e2f90dee5384048280f28ecb543ba147d"))
-		(35000, uint256("0x224a70e57c537fce405aaa4ec1c32326ec39c3c83c0b7c03a31d31c21288645f"))
-	;
+        (     0, hashGenesisBlock )
+        (  5000, uint256("0x332efe86d35da22ad3df008a09634653482e9a091e4e0dc9a6e565bcc8ddff2d"))
+        ( 10000, uint256("0x8481845fe7a49c3f9523ae6cedaa04bdb07703b9ad0745858be49ed4546dc543"))
+        ( 20000, uint256("0xc58ca23630bac3ec399065bd6ad5d6c867a275d31f465e2a2c443d363dd83245"))
+        ( 30000, uint256("0x8517d1b029a59408b43ac739e92da00e2f90dee5384048280f28ecb543ba147d"))
+        (100000, uint256("0x553128a7a21fe9adfa34f51169debd7200043da7919a5be04a04104e42610c64"))
+        (200000, uint256("0xe34b3704e1d44342e337a3188d04cb521c39357112e6f923225acbd85b97dc7e"))
+        (300000, uint256("0x2878bfe65e9421b679c7ddd75407a00722242a98de16a4f13bba9ef852e721c0"))
+        (400000, uint256("0x8abcac70597374c76bab1bfc9d969a3831d44dd89c487c9b8dfeb3b30931ad0b"))
+        (500000, uint256("0x96705a31ad4de92a4eb4dd87bbfd33457bd2593584bf661d408ffc14122c4625"))
+    ;
 
     // TestNet has no checkpoints
     static MapCheckpoints mapCheckpointsTestnet =
@@ -46,7 +47,6 @@ namespace Checkpoints
     bool CheckHardened(int nHeight, const uint256& hash)
     {
         MapCheckpoints& checkpoints = (fTestNet ? mapCheckpointsTestnet : mapCheckpoints);
-
         MapCheckpoints::const_iterator i = checkpoints.find(nHeight);
         if (i == checkpoints.end()) return true;
         return hash == i->second;
@@ -55,14 +55,12 @@ namespace Checkpoints
     int GetTotalBlocksEstimate()
     {
         MapCheckpoints& checkpoints = (fTestNet ? mapCheckpointsTestnet : mapCheckpoints);
-
         return checkpoints.rbegin()->first;
     }
 
     CBlockIndex* GetLastCheckpoint(const std::map<uint256, CBlockIndex*>& mapBlockIndex)
     {
         MapCheckpoints& checkpoints = (fTestNet ? mapCheckpointsTestnet : mapCheckpoints);
-
         BOOST_REVERSE_FOREACH(const MapCheckpoints::value_type& i, checkpoints)
         {
             const uint256& hash = i.second;
@@ -194,7 +192,7 @@ namespace Checkpoints
         return false;
     }
 
-    // Automatically select a suitable sync-checkpoint 
+    // Automatically select a suitable sync-checkpoint
     uint256 AutoSelectSyncCheckpoint()
     {
         const CBlockIndex *pindex = pindexBest;
@@ -239,7 +237,7 @@ namespace Checkpoints
             return false;
         if (hashBlock == hashPendingCheckpoint)
             return true;
-        if (mapOrphanBlocks.count(hashPendingCheckpoint) 
+        if (mapOrphanBlocks.count(hashPendingCheckpoint)
             && hashBlock == WantedByOrphan(mapOrphanBlocks[hashPendingCheckpoint]))
             return true;
         return false;
@@ -297,7 +295,7 @@ namespace Checkpoints
     {
         if (fDebug)
             printf("SetCheckpointPrivKey()\n");
-        
+
         // Test signing a sync-checkpoint with genesis block
         CSyncCheckpoint checkpoint;
         checkpoint.hashCheckpoint = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
@@ -320,7 +318,7 @@ namespace Checkpoints
     {
         if (fDebug)
             printf("SendSyncCheckpoint()\n");
-        
+
         CSyncCheckpoint checkpoint;
         checkpoint.hashCheckpoint = hashCheckpoint;
         CDataStream sMsg(SER_NETWORK, PROTOCOL_VERSION);
@@ -362,7 +360,7 @@ namespace Checkpoints
     }
 }
 
-// ppcoin: sync-checkpoint master key                 
+// ppcoin: sync-checkpoint master key
 const std::string CSyncCheckpoint::strMasterPubKey = "02334512c0d7a9a69289c4b7ad1c76e5330ef9dacd9da912c91a853986bddf0434";
 
 std::string CSyncCheckpoint::strMasterPrivKey = "";
