@@ -985,7 +985,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <location line="+1"/>
         <source>This label turns red, if any recipient receives an amount smaller than %1.
 
- This means a fee of at least %2 is required. 
+ This means a fee of at least %2 is required.
 
  Amounts below 0.546 times the minimum relay fee are shown as DUST.</source>
         <translation type="unfinished"></translation>
@@ -1686,8 +1686,8 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <location line="+86"/>
         <location line="+86"/>
         <location line="+32"/>
-        <source>0.00 SDC</source>
-        <translation type="unfinished">123.456 SDC {0.00 ?}</translation>
+        <source>0.00 VIOR</source>
+        <translation type="unfinished">123.456 VIOR {0.00 ?}</translation>
     </message>
     <message>
         <location line="-191"/>
@@ -1756,8 +1756,8 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <location line="+16"/>
-        <source>123.456 SDC</source>
-        <translation>123.456 SDC</translation>
+        <source>123.456 VIOR</source>
+        <translation>123.456 VIOR</translation>
     </message>
     <message>
         <location line="+31"/>
