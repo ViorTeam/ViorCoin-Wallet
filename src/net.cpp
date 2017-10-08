@@ -24,7 +24,7 @@
 using namespace std;
 using namespace boost;
 
-static const int MAX_OUTBOUND_CONNECTIONS = 16;
+static const int MAX_OUTBOUND_CONNECTIONS = 12;
 
 void ThreadMessageHandler2(void* parg);
 void ThreadSocketHandler2(void* parg);
@@ -371,7 +371,7 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 
             pszGet = "GET / HTTP/1.1\r\n"
                      "Host: checkip.dyndns.org\r\n"
-                     "User-Agent: viorcoin\r\n"
+                     "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)\r\n"
                      "Connection: close\r\n"
                      "\r\n";
 
@@ -379,18 +379,18 @@ bool GetMyExternalIP(CNetAddr& ipRet)
         }
         else if (nHost == 2)
         {
-            addrConnect = CService("74.208.43.192", 80); // www.showmyip.com
+            addrConnect = CService("204.246.68.168", 80); // www.showmyip.com
 
             if (nLookup == 1)
             {
-                CService addrIP("www.showmyip.com", 80, true);
+                CService addrIP("givecoin.io", 80, true);
                 if (addrIP.IsValid())
                     addrConnect = addrIP;
             }
 
-            pszGet = "GET /simple/ HTTP/1.1\r\n"
-                     "Host: www.showmyip.com\r\n"
-                     "User-Agent: viorcoin\r\n"
+            pszGet = "GET /checkip/ HTTP/1.1\r\n"
+                     "Host: givecoin.io\r\n"
+                     "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)\r\n"
                      "Connection: close\r\n"
                      "\r\n";
 
@@ -763,10 +763,10 @@ void SocketSendData(CNode *pnode)
         if (nBytes > 0) {
             pnode->nLastSend = GetTime();
             pnode->nSendOffset += nBytes;
-            
+
             pnode->nSendBytes += nBytes;
             pnode->RecordBytesSent(nBytes);
-            
+
             if (pnode->nSendOffset == data.size()) {
                 pnode->nSendOffset = 0;
                 pnode->nSendSize -= data.size();
@@ -1171,14 +1171,10 @@ void ThreadMapPort2(void* parg)
 #ifndef UPNPDISCOVER_SUCCESS
     /* miniupnpc 1.5 */
     devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0);
-#elif MINIUPNPC_API_VERSION < 14
+#else
     /* miniupnpc 1.6 */
     int error = 0;
     devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, &error);
-#else
-    /* miniupnpc 1.9.20150730 */
-    int error = 0;
-    devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, 2, &error);
 #endif
 
     struct UPNPUrls urls;
@@ -1296,9 +1292,7 @@ void MapPort()
 // The second name should resolve to a list of seed addresses.
 
 static const char *strDNSSeed[][2] = {
-    {"178.62.244.59", "178.62.244.59"},
-	{"178.62.147.100", "178.62.147.100"},
-
+   {"vior.altexplorer.xyz", "163.172.13.126"}
 };
 
 void ThreadDNSAddressSeed(void* parg)
@@ -1356,21 +1350,19 @@ void ThreadDNSAddressSeed2(void* parg)
     printf("%d addresses found from DNS seeds\n", found);
 }
 
-
-
-
-
-
-
-
-
-
 unsigned int pnSeed[] =
 {
-	0x3bf43eb2, 0x64933eb2,
+0xa3ac0d7e,
+0x287095c0,
+0x63344e8f,
+0x8b3b9aff,
+0x4fa116a0,
+0x430ba62f,
+0x55c3f6b6,
+0xadefe845,
+0x46c04488,
+0x4ca9395c,
 };
-
-
 
 void DumpAddresses()
 {
