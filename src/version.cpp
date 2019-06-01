@@ -37,7 +37,7 @@ const std::string CLIENT_NAME("ViorCoin");
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
 # define GIT_COMMIT_ID ""
-# define GIT_COMMIT_DATE "Sun, 14 Dec 2014 00:00:00 UTC"
+# define GIT_COMMIT_DATE "Friday, 18 November 15:06:10 WIB"
 #endif
 
 #define BUILD_DESC_FROM_COMMIT(maj,min,rev,build,commit) \
